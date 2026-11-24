@@ -15,4 +15,18 @@ public class UserService : IUserService
         _users.Add(user);
         Console.WriteLine($"User {user.Name} qo'shildi");
     }
+
+    public User GetUserById(int id)
+    {
+        return _users.Find(v => v.Id == id);
+
+    }
+
+    public void PrintUser(User user)
+    {
+        Console.WriteLine($"""
+        User topildi, Ma'lumotlari => Name:{user.Name}, LastName: {user.LastName}, Email: {user.Email}, PhoneNumber: {user.PhoneNumber}
+        """);
+    }
+
 }
