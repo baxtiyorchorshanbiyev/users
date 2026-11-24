@@ -18,7 +18,15 @@ public class UserService : IUserService
 
     public User GetUserById(int id)
     {
-        return _users.Find(v => v.Id == id);
+        var user = _users.Find(v => v.Id == id);
+        return new User()
+        {
+            Id = user.Id,
+            Name = user.Name,
+            LastName = user.LastName,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber
+        };
 
     }
 
@@ -27,6 +35,11 @@ public class UserService : IUserService
         Console.WriteLine($"""
         User topildi, Ma'lumotlari => Name:{user.Name}, LastName: {user.LastName}, Email: {user.Email}, PhoneNumber: {user.PhoneNumber}
         """);
+    }
+
+    public User[] GetAllUsers()
+    {
+        return this._users.ToArray();
     }
 
 }
