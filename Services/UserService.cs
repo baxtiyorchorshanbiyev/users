@@ -42,10 +42,35 @@ public class UserService : IUserService
         return this._users.ToArray();
     }
 
-    public void UpdateUser(int id,string name,string email)
+    public void UpdateUser(User user)
     {
-        User existingUser = GetUserById(id);
-        existingUser.UpdateUser(id,name,email);
-        Console.WriteLine($"User {id},{name},{email} yengilandi");
+
+        var existingUser = _users.Find(v => v.Id == user.Id);
+
+        if (existingUser == null)
+        {
+            Console.WriteLine($"User {user.Id} topilmadi");
+            return;
+        }
+
+        existingUser.Name = user.Name;
+        existingUser.LastName = user.LastName;
+        existingUser.Email = user.Email;
+        existingUser.PhoneNumber = user.PhoneNumber;
+        Console.WriteLine($"User {user.Id} yangilandi");
+    }
+
+    public void DeleteUser(int id)
+    {
+        var existingUser = _users.Find(user => user.Id == id);
+
+        if (existingUser == null)
+        {
+            Console.WriteLine($"User {id} topilmadi");
+            return;
+        }
+
+        _users.Remove(existingUser);
+        Console.WriteLine($"User {id} o'chirildi");
     }
 }
