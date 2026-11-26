@@ -42,4 +42,10 @@ public class UserService : IUserService
         return this._users.ToArray();
     }
 
+    public void UpdateUser(int id,string name,string email)
+    {
+        User existingUser = GetUserById(id);
+        existingUser.UpdateUser(id,name,email);
+        Console.WriteLine($"User {id},{name},{email} yengilandi");
+    }
 }
